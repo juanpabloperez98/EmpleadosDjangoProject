@@ -1,2 +1,2 @@
 # EmpleadosDjangoProject
-This project is jsut to practice
+This project is just to practice
