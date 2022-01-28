@@ -6,6 +6,8 @@ from django.views.generic import (CreateView, DeleteView, DetailView, ListView,
 
 from apps.persona import models
 
+from .forms import EmpleadoForm
+
 # Listar los empleados
 
 class ListAllEmpleados(ListView):
@@ -91,19 +93,11 @@ class SuccessTemplateView(TemplateView):
 class EmpleadoCreateView(CreateView):
     model = models.Empleado
     template_name = "persona/add.html"
-    fields = [
-        'first_name',
-        'last_name',
-        'job',
-        'departamento',
-        'Habilidades',
-        'avatar'
-    ]
+    form_class = EmpleadoForm
     # fields = ('__all__')
     success_url = reverse_lazy('persona_app:lista_empleados_admin')
 
     def form_valid(self, form):
-        print("ENTRA")
         empleado = form.save(commit = False)
         empleado.full_name = empleado.first_name + ' ' + empleado.last_name
         empleado.save()
